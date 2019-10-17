@@ -1,0 +1,77 @@
+//group 'org.wls.tcpthrough'
+//version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.10.0'
+    compile 'io.netty:netty-all:4.1.38.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.google.protobuf:protobuf-gradle-plugin:0.8.10"
+    }
+}
+
+apply plugin: "com.google.protobuf"
+
+protobuf {
+    protoc {
+        path = '/Users/wls/program/protobuf_3/bin/protoc'
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
+
+    generatedFilesBaseDir = "$projectDir/src/"
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/protobuf'
+        }
+    }
+}
+
+
+
+apply plugin: 'distribution'
+distributions {
+
+    dclient {
+        baseName = 'client'
+        mainClassName = 'org.wls.tcpthrough.TcpThroughClient'
+        manifest {
+            attributes 'Main-Class': 'org.wls.tcpthrough.TcpThroughClient'
+        }
+        version '1.0'
+    }
+
+}
+
+
+
+
