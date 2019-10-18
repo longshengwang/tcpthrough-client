@@ -4,11 +4,15 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wls.tcpthrough.inner.InnerClient;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.ManagerResponse;
 
 public class DataHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger LOG = LogManager.getLogger(DataHandler.class);
+
     public Channel innerChannel;
     private RegisterProtocol registerProtocol;
     private InnerClient innerClient;
@@ -40,18 +44,19 @@ public class DataHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Data channel start to register" + channelId);
+        LOG.info("Start to register the data channel with channel is " + channelId);
         ByteBuf byteBuf = Unpooled.copiedBuffer(channelId.getBytes());
         DataHandler self = this;
         ctx.writeAndFlush(byteBuf).addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
                 if(future.isSuccess()){
-//                    System.out.println("Data Client 成功发送channel id");
+                    LOG.info("Start to connect to inner service");
                     innerClient = new InnerClient(registerProtocol, ctx.channel(), self);
                     innerClient.run();
                 } else {
-//                    System.out.println("Data channel register error");
+                    //low probability in here
+                    LOG.error("[ Very Low Probability ] Send the channel id to the data server error!");
                 }
             }
         });

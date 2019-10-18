@@ -1,12 +1,13 @@
 package org.wls.tcpthrough.inner;
 
 import io.netty.channel.*;
-import org.wls.tcpthrough.model.ManagerProtocolBuf.ManagerResponse;
-import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class InnerHandler extends ChannelInboundHandlerAdapter {
 
-//    private ChannelFuture dataChannelFuture;
+    private static final Logger LOG = LogManager.getLogger(InnerHandler.class);
+
     private Channel dataChannel;
     public InnerHandler(Channel dataChannel){
         this.dataChannel = dataChannel;
@@ -19,33 +20,32 @@ public class InnerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        System.out.println("INNER 有数据产生 =======》》》》》");
         dataChannel.writeAndFlush(msg).addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
-//                if(future.isSuccess()){
-////                    System.out.println("INNER  is SUCCESS");
-//                } else {
-////                    System.out.println("INNER  is error");
-//                }
+                if(future.isSuccess()){
+                } else {
+                    LOG.error("Send the data to dataServer error!");
+                    dataChannel.close();
+                    ctx.channel().close();
+                }
             }
         });
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("inner channel active");
-    }
+//    @Override
+//    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        System.out.println("inner channel active");
+//    }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("INNER channelInactive");
+        LOG.debug("Inner connection to local service is inactive");
         dataChannel.close();
     }
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-//        System.out.println("INNER channelReadComplete");
-    }
+//    @Override
+//    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+//    }
 }
 

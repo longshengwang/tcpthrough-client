@@ -9,17 +9,20 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
-import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.ManagerResponse;
+import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
 
-import java.util.logging.Logger;
 
 /**
  * Created by wls on 2019/10/15.
  */
 public class ManagerClient implements Runnable {
 
-    private static final Logger LOGGER = Logger.getLogger("ManagerClient");
+    private static final Logger LOG = LogManager.getLogger(ManagerClient.class);
+
+
     private RegisterProtocol registerProtocol;
     private ManagerHandler managerHandler;
 
@@ -63,9 +66,9 @@ public class ManagerClient implements Runnable {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     if(future.isSuccess()){
-                        LOGGER.info("operation complete");
+                        LOG.info("Connect to manage server successfully");
                     } else {
-                        LOGGER.info("operation fail");
+                        LOG.error("Connect to manage server failed");
                     }
                 }
             });

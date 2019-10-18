@@ -9,6 +9,8 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wls.tcpthrough.data.DataHandler;
 import org.wls.tcpthrough.manager.ManagerHandler;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
@@ -17,9 +19,9 @@ import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
  * Created by wls on 2019/10/16.
  */
 public class InnerClient{
-    //    InnerHandler handler;
+    private static final Logger LOG = LogManager.getLogger(InnerClient.class);
+
     public ChannelFuture channelFuture;
-    //    ChannelFuture dataChannelFuture;
     RegisterProtocol registerProtocol;
     Channel dataChannel;
     DataHandler dataHandler;
@@ -30,7 +32,6 @@ public class InnerClient{
         this.dataHandler = dataHandler;
     }
 
-//    @Override
     public void run() throws InterruptedException {
         try {
             Bootstrap b = new Bootstrap();
@@ -50,19 +51,15 @@ public class InnerClient{
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     if (future.isSuccess()) {
-//                        LOGGER.info("operation complete");
                         dataHandler.innerChannel = future.channel();
                         dataChannel.read();
                     } else {
-//                        LOGGER.info("operation fail");
-                        System.out.println("本地连接失败");
+                        LOG.error("Connect to the local service error!");
                         dataChannel.close();
                     }
                 }
             });
-//            channelFuture.channel().closeFuture().sync();
         } finally {
-//            group.shutdownGracefully();
         }
     }
 }

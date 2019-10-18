@@ -143,6 +143,24 @@ public final class ManagerProtocolBuf {
      * @return The remoteManagerPort.
      */
     int getRemoteManagerPort();
+
+    /**
+     * <code>string publicKey = 15;</code>
+     * @return The publicKey.
+     */
+    java.lang.String getPublicKey();
+    /**
+     * <code>string publicKey = 15;</code>
+     * @return The bytes for publicKey.
+     */
+    com.google.protobuf.ByteString
+        getPublicKeyBytes();
+
+    /**
+     * <code>bool isRemoteManage = 16;</code>
+     * @return The isRemoteManage.
+     */
+    boolean getIsRemoteManage();
   }
   /**
    * Protobuf type {@code RegisterProtocol}
@@ -161,6 +179,7 @@ public final class ManagerProtocolBuf {
       secretKeyMd5_ = "";
       localHost_ = "";
       remoteHost_ = "";
+      publicKey_ = "";
     }
     public static final int NAME_FIELD_NUMBER = 1;
     private java.lang.String name_;
@@ -732,6 +751,84 @@ public final class ManagerProtocolBuf {
     private void clearRemoteManagerPort() {
       
       remoteManagerPort_ = 0;
+    }
+
+    public static final int PUBLICKEY_FIELD_NUMBER = 15;
+    private java.lang.String publicKey_;
+    /**
+     * <code>string publicKey = 15;</code>
+     * @return The publicKey.
+     */
+    @java.lang.Override
+    public java.lang.String getPublicKey() {
+      return publicKey_;
+    }
+    /**
+     * <code>string publicKey = 15;</code>
+     * @return The bytes for publicKey.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPublicKeyBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(publicKey_);
+    }
+    /**
+     * <code>string publicKey = 15;</code>
+     * @param value The publicKey to set.
+     */
+    private void setPublicKey(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      publicKey_ = value;
+    }
+    /**
+     * <code>string publicKey = 15;</code>
+     */
+    private void clearPublicKey() {
+      
+      publicKey_ = getDefaultInstance().getPublicKey();
+    }
+    /**
+     * <code>string publicKey = 15;</code>
+     * @param value The bytes for publicKey to set.
+     */
+    private void setPublicKeyBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      publicKey_ = value.toStringUtf8();
+    }
+
+    public static final int ISREMOTEMANAGE_FIELD_NUMBER = 16;
+    private boolean isRemoteManage_;
+    /**
+     * <code>bool isRemoteManage = 16;</code>
+     * @return The isRemoteManage.
+     */
+    @java.lang.Override
+    public boolean getIsRemoteManage() {
+      return isRemoteManage_;
+    }
+    /**
+     * <code>bool isRemoteManage = 16;</code>
+     * @param value The isRemoteManage to set.
+     */
+    private void setIsRemoteManage(boolean value) {
+      
+      isRemoteManage_ = value;
+    }
+    /**
+     * <code>bool isRemoteManage = 16;</code>
+     */
+    private void clearIsRemoteManage() {
+      
+      isRemoteManage_ = false;
     }
 
     public static org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol parseFrom(
@@ -1389,6 +1486,83 @@ public final class ManagerProtocolBuf {
         return this;
       }
 
+      /**
+       * <code>string publicKey = 15;</code>
+       * @return The publicKey.
+       */
+      @java.lang.Override
+      public java.lang.String getPublicKey() {
+        return instance.getPublicKey();
+      }
+      /**
+       * <code>string publicKey = 15;</code>
+       * @return The bytes for publicKey.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getPublicKeyBytes() {
+        return instance.getPublicKeyBytes();
+      }
+      /**
+       * <code>string publicKey = 15;</code>
+       * @param value The publicKey to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPublicKey(
+          java.lang.String value) {
+        copyOnWrite();
+        instance.setPublicKey(value);
+        return this;
+      }
+      /**
+       * <code>string publicKey = 15;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPublicKey() {
+        copyOnWrite();
+        instance.clearPublicKey();
+        return this;
+      }
+      /**
+       * <code>string publicKey = 15;</code>
+       * @param value The bytes for publicKey to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPublicKeyBytes(
+          com.google.protobuf.ByteString value) {
+        copyOnWrite();
+        instance.setPublicKeyBytes(value);
+        return this;
+      }
+
+      /**
+       * <code>bool isRemoteManage = 16;</code>
+       * @return The isRemoteManage.
+       */
+      @java.lang.Override
+      public boolean getIsRemoteManage() {
+        return instance.getIsRemoteManage();
+      }
+      /**
+       * <code>bool isRemoteManage = 16;</code>
+       * @param value The isRemoteManage to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsRemoteManage(boolean value) {
+        copyOnWrite();
+        instance.setIsRemoteManage(value);
+        return this;
+      }
+      /**
+       * <code>bool isRemoteManage = 16;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsRemoteManage() {
+        copyOnWrite();
+        instance.clearIsRemoteManage();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:RegisterProtocol)
     }
     @java.lang.Override
@@ -1419,11 +1593,13 @@ public final class ManagerProtocolBuf {
               "remoteHost_",
               "remoteDataPort_",
               "remoteManagerPort_",
+              "publicKey_",
+              "isRemoteManage_",
             };
             java.lang.String info =
-                "\u0000\u000e\u0000\u0000\u0001\u000e\u000e\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0000\u0010\u0000\u0000\u0001\u0010\u0010\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
                 "\u0003\u0004\u0004\u0007\u0005\u0007\u0006\u0208\u0007\u0208\b\u0208\t\u0208\n\u0208" +
-                "\u000b\u0004\f\u0208\r\u0004\u000e\u0004";
+                "\u000b\u0004\f\u0208\r\u0004\u000e\u0004\u000f\u0208\u0010\u0007";
             return newMessageInfo(DEFAULT_INSTANCE, info, objects);
         }
         // fall through
@@ -1484,7 +1660,7 @@ public final class ManagerProtocolBuf {
 
     /**
      * <pre>
-     * 1-&gt;res, 2-&gt;new connection
+     * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
      * </pre>
      *
      * <code>int32 type = 1;</code>
@@ -1494,35 +1670,35 @@ public final class ManagerProtocolBuf {
 
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @return The channel.
+     * <code>string value = 2;</code>
+     * @return The value.
      */
-    java.lang.String getChannel();
+    java.lang.String getValue();
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @return The bytes for channel.
+     * <code>string value = 2;</code>
+     * @return The bytes for value.
      */
     com.google.protobuf.ByteString
-        getChannelBytes();
+        getValueBytes();
 
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @return The channelMd5.
+     * <code>string valueMd5 = 3;</code>
+     * @return The valueMd5.
      */
-    java.lang.String getChannelMd5();
+    java.lang.String getValueMd5();
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @return The bytes for channelMd5.
+     * <code>string valueMd5 = 3;</code>
+     * @return The bytes for valueMd5.
      */
     com.google.protobuf.ByteString
-        getChannelMd5Bytes();
+        getValueMd5Bytes();
   }
   /**
    * Protobuf type {@code ManagerResponse}
@@ -1533,14 +1709,14 @@ public final class ManagerProtocolBuf {
       // @@protoc_insertion_point(message_implements:ManagerResponse)
       ManagerResponseOrBuilder {
     private ManagerResponse() {
-      channel_ = "";
-      channelMd5_ = "";
+      value_ = "";
+      valueMd5_ = "";
     }
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_;
     /**
      * <pre>
-     * 1-&gt;res, 2-&gt;new connection
+     * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
      * </pre>
      *
      * <code>int32 type = 1;</code>
@@ -1552,7 +1728,7 @@ public final class ManagerProtocolBuf {
     }
     /**
      * <pre>
-     * 1-&gt;res, 2-&gt;new connection
+     * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
      * </pre>
      *
      * <code>int32 type = 1;</code>
@@ -1564,7 +1740,7 @@ public final class ManagerProtocolBuf {
     }
     /**
      * <pre>
-     * 1-&gt;res, 2-&gt;new connection
+     * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
      * </pre>
      *
      * <code>int32 type = 1;</code>
@@ -1574,128 +1750,128 @@ public final class ManagerProtocolBuf {
       type_ = 0;
     }
 
-    public static final int CHANNEL_FIELD_NUMBER = 2;
-    private java.lang.String channel_;
+    public static final int VALUE_FIELD_NUMBER = 2;
+    private java.lang.String value_;
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @return The channel.
+     * <code>string value = 2;</code>
+     * @return The value.
      */
     @java.lang.Override
-    public java.lang.String getChannel() {
-      return channel_;
+    public java.lang.String getValue() {
+      return value_;
     }
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @return The bytes for channel.
+     * <code>string value = 2;</code>
+     * @return The bytes for value.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getChannelBytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(channel_);
+        getValueBytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(value_);
     }
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @param value The channel to set.
+     * <code>string value = 2;</code>
+     * @param value The value to set.
      */
-    private void setChannel(
+    private void setValue(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      channel_ = value;
+      value_ = value;
     }
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
+     * <code>string value = 2;</code>
      */
-    private void clearChannel() {
+    private void clearValue() {
       
-      channel_ = getDefaultInstance().getChannel();
+      value_ = getDefaultInstance().getValue();
     }
     /**
      * <pre>
-     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+     * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
      * </pre>
      *
-     * <code>string channel = 2;</code>
-     * @param value The bytes for channel to set.
+     * <code>string value = 2;</code>
+     * @param value The bytes for value to set.
      */
-    private void setChannelBytes(
+    private void setValueBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      channel_ = value.toStringUtf8();
+      value_ = value.toStringUtf8();
     }
 
-    public static final int CHANNELMD5_FIELD_NUMBER = 3;
-    private java.lang.String channelMd5_;
+    public static final int VALUEMD5_FIELD_NUMBER = 3;
+    private java.lang.String valueMd5_;
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @return The channelMd5.
+     * <code>string valueMd5 = 3;</code>
+     * @return The valueMd5.
      */
     @java.lang.Override
-    public java.lang.String getChannelMd5() {
-      return channelMd5_;
+    public java.lang.String getValueMd5() {
+      return valueMd5_;
     }
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @return The bytes for channelMd5.
+     * <code>string valueMd5 = 3;</code>
+     * @return The bytes for valueMd5.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getChannelMd5Bytes() {
-      return com.google.protobuf.ByteString.copyFromUtf8(channelMd5_);
+        getValueMd5Bytes() {
+      return com.google.protobuf.ByteString.copyFromUtf8(valueMd5_);
     }
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @param value The channelMd5 to set.
+     * <code>string valueMd5 = 3;</code>
+     * @param value The valueMd5 to set.
      */
-    private void setChannelMd5(
+    private void setValueMd5(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      channelMd5_ = value;
+      valueMd5_ = value;
     }
     /**
-     * <code>string channelMd5 = 3;</code>
+     * <code>string valueMd5 = 3;</code>
      */
-    private void clearChannelMd5() {
+    private void clearValueMd5() {
       
-      channelMd5_ = getDefaultInstance().getChannelMd5();
+      valueMd5_ = getDefaultInstance().getValueMd5();
     }
     /**
-     * <code>string channelMd5 = 3;</code>
-     * @param value The bytes for channelMd5 to set.
+     * <code>string valueMd5 = 3;</code>
+     * @param value The bytes for valueMd5 to set.
      */
-    private void setChannelMd5Bytes(
+    private void setValueMd5Bytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      channelMd5_ = value.toStringUtf8();
+      valueMd5_ = value.toStringUtf8();
     }
 
     public static org.wls.tcpthrough.model.ManagerProtocolBuf.ManagerResponse parseFrom(
@@ -1795,7 +1971,7 @@ public final class ManagerProtocolBuf {
 
       /**
        * <pre>
-       * 1-&gt;res, 2-&gt;new connection
+       * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
        * </pre>
        *
        * <code>int32 type = 1;</code>
@@ -1807,7 +1983,7 @@ public final class ManagerProtocolBuf {
       }
       /**
        * <pre>
-       * 1-&gt;res, 2-&gt;new connection
+       * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
        * </pre>
        *
        * <code>int32 type = 1;</code>
@@ -1821,7 +1997,7 @@ public final class ManagerProtocolBuf {
       }
       /**
        * <pre>
-       * 1-&gt;res, 2-&gt;new connection
+       * 1-&gt;res, 2-&gt;new connection, 3-&gt; new config
        * </pre>
        *
        * <code>int32 type = 1;</code>
@@ -1835,119 +2011,119 @@ public final class ManagerProtocolBuf {
 
       /**
        * <pre>
-       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
        * </pre>
        *
-       * <code>string channel = 2;</code>
-       * @return The channel.
+       * <code>string value = 2;</code>
+       * @return The value.
        */
       @java.lang.Override
-      public java.lang.String getChannel() {
-        return instance.getChannel();
+      public java.lang.String getValue() {
+        return instance.getValue();
       }
       /**
        * <pre>
-       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
        * </pre>
        *
-       * <code>string channel = 2;</code>
-       * @return The bytes for channel.
+       * <code>string value = 2;</code>
+       * @return The bytes for value.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getChannelBytes() {
-        return instance.getChannelBytes();
+          getValueBytes() {
+        return instance.getValueBytes();
       }
       /**
        * <pre>
-       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
        * </pre>
        *
-       * <code>string channel = 2;</code>
-       * @param value The channel to set.
+       * <code>string value = 2;</code>
+       * @param value The value to set.
        * @return This builder for chaining.
        */
-      public Builder setChannel(
+      public Builder setValue(
           java.lang.String value) {
         copyOnWrite();
-        instance.setChannel(value);
+        instance.setValue(value);
         return this;
       }
       /**
        * <pre>
-       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
        * </pre>
        *
-       * <code>string channel = 2;</code>
+       * <code>string value = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearChannel() {
+      public Builder clearValue() {
         copyOnWrite();
-        instance.clearChannel();
+        instance.clearValue();
         return this;
       }
       /**
        * <pre>
-       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server
+       * type=1 -&gt; 如果加密的话，是密码; type=2 -&gt; channel uuid,建立连接的时候用来告诉server; type = 3 -&gt; remote_proxy_port, local_host, local_port
        * </pre>
        *
-       * <code>string channel = 2;</code>
-       * @param value The bytes for channel to set.
+       * <code>string value = 2;</code>
+       * @param value The bytes for value to set.
        * @return This builder for chaining.
        */
-      public Builder setChannelBytes(
+      public Builder setValueBytes(
           com.google.protobuf.ByteString value) {
         copyOnWrite();
-        instance.setChannelBytes(value);
+        instance.setValueBytes(value);
         return this;
       }
 
       /**
-       * <code>string channelMd5 = 3;</code>
-       * @return The channelMd5.
+       * <code>string valueMd5 = 3;</code>
+       * @return The valueMd5.
        */
       @java.lang.Override
-      public java.lang.String getChannelMd5() {
-        return instance.getChannelMd5();
+      public java.lang.String getValueMd5() {
+        return instance.getValueMd5();
       }
       /**
-       * <code>string channelMd5 = 3;</code>
-       * @return The bytes for channelMd5.
+       * <code>string valueMd5 = 3;</code>
+       * @return The bytes for valueMd5.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getChannelMd5Bytes() {
-        return instance.getChannelMd5Bytes();
+          getValueMd5Bytes() {
+        return instance.getValueMd5Bytes();
       }
       /**
-       * <code>string channelMd5 = 3;</code>
-       * @param value The channelMd5 to set.
+       * <code>string valueMd5 = 3;</code>
+       * @param value The valueMd5 to set.
        * @return This builder for chaining.
        */
-      public Builder setChannelMd5(
+      public Builder setValueMd5(
           java.lang.String value) {
         copyOnWrite();
-        instance.setChannelMd5(value);
+        instance.setValueMd5(value);
         return this;
       }
       /**
-       * <code>string channelMd5 = 3;</code>
+       * <code>string valueMd5 = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearChannelMd5() {
+      public Builder clearValueMd5() {
         copyOnWrite();
-        instance.clearChannelMd5();
+        instance.clearValueMd5();
         return this;
       }
       /**
-       * <code>string channelMd5 = 3;</code>
-       * @param value The bytes for channelMd5 to set.
+       * <code>string valueMd5 = 3;</code>
+       * @param value The bytes for valueMd5 to set.
        * @return This builder for chaining.
        */
-      public Builder setChannelMd5Bytes(
+      public Builder setValueMd5Bytes(
           com.google.protobuf.ByteString value) {
         copyOnWrite();
-        instance.setChannelMd5Bytes(value);
+        instance.setValueMd5Bytes(value);
         return this;
       }
 
@@ -1968,8 +2144,8 @@ public final class ManagerProtocolBuf {
         case BUILD_MESSAGE_INFO: {
             java.lang.Object[] objects = new java.lang.Object[] {
               "type_",
-              "channel_",
-              "channelMd5_",
+              "value_",
+              "valueMd5_",
             };
             java.lang.String info =
                 "\u0000\u0003\u0000\u0000\u0001\u0003\u0003\u0000\u0000\u0000\u0001\u0004\u0002\u0208" +
