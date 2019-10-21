@@ -1,5 +1,6 @@
 package org.wls.tcpthrough.manager;
 
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -10,6 +11,7 @@ import org.wls.tcpthrough.data.DataClient;
 import org.wls.tcpthrough.model.GlobalObject;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.ManagerResponse;
 import org.wls.tcpthrough.model.ManagerProtocolBuf.RegisterProtocol;
+import org.wls.tcpthrough.model.RegisterInfo;
 import org.wls.tcpthrough.model.ResponseType;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.List;
 public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse> {
     public static final Logger LOG = LogManager.getLogger(ManagerHandler.class);
 
-    private String name;
+    private RegisterInfo registerInfo;
     private RegisterProtocol registerProtocol;
     private NioEventLoopGroup clientGroup;
     private List<RegisterProtocol> registerProtocolList;
@@ -127,6 +129,9 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
                             .setRemoteDataPort(registerProtocol.getRemoteDataPort())
                             .build();
                     registerProtocolList.add(newRegisterProtocol);
+
+                    ctx.channel().writeAndFlush(newRegisterProtocol);
+
                 } else {
                     throw new Exception("NEW CONF RESPONSE data is not correct( " + mixtureStr + " )");
                 }
@@ -134,6 +139,7 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
                 LOG.error(e.getMessage(), e);
             }
         } else if(ResponseType.DELETE_CONF_RESPONSE.get() == msg.getType()){
+            LOG.info("[ DELETE_CONF_RESPONSE ] Server is delete the configuration!");
             String proxyPort = msg.getValue();
             String proxyPortMd5 = msg.getValueMd5();
             try{
@@ -147,6 +153,12 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
             } catch (Exception e){
                 LOG.error("", e);
             }
+        } else if(ResponseType.REGISTER_FAIL.get() == msg.getType()){
+            LOG.error("Register proxy server error! Error reason:" + msg.getValue());
+            this.registerInfo.setRegisterError(true);
+            this.registerInfo.setErrorReason(msg.getValue());
+            ctx.channel().close();
+
         }
     }
 
@@ -163,6 +175,10 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         LOG.info("Connect to manager server.And will send the initialize register protocol");
         ctx.channel().writeAndFlush(registerProtocol);
+    }
+
+    public void setRegisterInfo(RegisterInfo registerInfo) {
+        this.registerInfo = registerInfo;
     }
 
     public static void main(String[] args) {

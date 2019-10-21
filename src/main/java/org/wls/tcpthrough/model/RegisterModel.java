@@ -3,7 +3,24 @@ package org.wls.tcpthrough.model;
 /**
  * Created by wls on 2019/10/16.
  */
-public class RegisterProtocol2 {
+public class RegisterModel {
+
+//    String name;
+//    String password;
+//    String remoteProxyPort
+//    String isAuth;
+//    String isEncrypt ;
+//    String privateKey;
+//    String secretKey;
+//    String nameMd5 ;
+//    String secretKeyMd5;
+//    String localHost;
+//    String localPort;
+//    String remoteHost
+//    String remoteDataPort;
+//    String remoteManagerPort = prop.getProperty("remoteManagerPort");
+//    String publicKey = prop.getProperty("publicKey");
+//    String isRemoteManage = prop.getProperty("isRemoteManage");
 
     private boolean isEncrypt; /* */
     private String publicKey;  /* */

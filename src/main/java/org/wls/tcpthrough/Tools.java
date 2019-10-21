@@ -32,18 +32,18 @@ public class Tools {
         return RegisterProtocol.newBuilder()
                 .setIsAuth(false)
                 .setIsEncrypt(false)
-                .setPrivateKey(null)
-                .setPublicKey(null)
-                .setSecretKey(null)
-                .setPassword(null)
-                .setName(null)
-                .setRemoteHost(null)
+                .setPrivateKey("")
+                .setPublicKey("")
+                .setSecretKey("")
+                .setPassword("")
+                .setName("")
+                .setRemoteHost("")
                 .setRemoteProxyPort(-1)
                 .setRemoteManagerPort(-1)
                 .setRemoteDataPort(-1)
                 .setLocalPort(-1)
-                .setNameMd5(null)
-                .setSecretKeyMd5(null)
+                .setNameMd5("")
+                .setSecretKeyMd5("")
                 .build();
 
     }
@@ -51,14 +51,13 @@ public class Tools {
     public static String protocolToString(RegisterProtocol registerProtocol){
         StringBuilder builder = new StringBuilder();
         builder.append("\nRegisterProtocol:\n")
-                .append("    RemoteProxyPort : "  + registerProtocol.getRemoteProxyPort())
-                .append("    Name : "  + registerProtocol.getName())
-                .append("    LocalHost : " + registerProtocol.getLocalHost())
-                .append("    LocalPort : " + registerProtocol.getLocalPort())
-                .append("    IsRemoteManage : " + registerProtocol.getIsRemoteManage())
-                .append("    IsAuth : " + registerProtocol.getIsAuth())
-                .append("    IsEncrypt : " + registerProtocol.getIsEncrypt())
-                .append("\n");
+                .append("    RemoteProxyPort : "  + registerProtocol.getRemoteProxyPort() + "\n")
+                .append("    Name : "  + registerProtocol.getName() + "\n")
+                .append("    LocalHost : " + registerProtocol.getLocalHost() + "\n")
+                .append("    LocalPort : " + registerProtocol.getLocalPort() + "\n")
+                .append("    IsRemoteManage : " + registerProtocol.getIsRemoteManage() + "\n")
+                .append("    IsAuth : " + registerProtocol.getIsAuth() + "\n")
+                .append("    IsEncrypt : " + registerProtocol.getIsEncrypt() + "\n");
         return builder.toString();
 
     }
