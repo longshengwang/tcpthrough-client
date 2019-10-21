@@ -142,6 +142,10 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
             }
         } else if(ResponseType.DELETE_CONF_RESPONSE.get() == msg.getType()){
             LOG.info("[ DELETE_CONF_RESPONSE ] Server is delete the configuration!");
+            if (!registerProtocol.getIsRemoteManage()) {
+                LOG.warn("Client cannot be managed by server!Please check local register protocol(isRemoteManage).");
+                return;
+            }
             String proxyPort = msg.getValue();
             String proxyPortMd5 = msg.getValueMd5();
             try{
