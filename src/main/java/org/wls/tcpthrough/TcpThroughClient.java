@@ -102,7 +102,6 @@ public class TcpThroughClient {
         String remoteManagerPort = prop.getProperty("remote_manager_port");
         String publicKey = prop.getProperty("public_key");
         String isRemoteManage = prop.getProperty("is_remote_manage");
-        System.out.println(tranArgsBool(isRemoteManage));
         return RegisterProtocol.newBuilder()
                 .setName(tranArgsStr(name))
                 .setPassword(tranArgsStr(password))
@@ -152,25 +151,14 @@ public class TcpThroughClient {
         if (args.length == 0) {
             String userHomeDir = System.getProperty("user.home");
             return loadFromFilePath(getDefaultPath(userHomeDir));
-        } else {
-//            Options options = new Options();
-//            options.addRequiredOption("f", "file", true, "The path of config file!");
-//            options.addOption(Option.builder("h")
-//                    .longOpt("help")
-//                    .desc("show this help message and exit program")
-//                    .build());
-//
-//            CommandLineParser parser = new DefaultParser();
-//            HelpFormatter formatter = new HelpFormatter();
+        } else {;
             CommandLine cmd = null;
             try {
                 cmd = parser.parse(options, args);
             } catch (ParseException e) {
-//                formatter.printHelp(CLIENT_CMD_STR, options, false);
                 return null;
             }
             if (cmd.hasOption('h') || cmd.hasOption("--help")) {
-//                formatter.printHelp(CLIENT_CMD_STR, options, false);
                 return null;
             }
 
@@ -213,14 +201,14 @@ public class TcpThroughClient {
             return;
         }
 
-        System.out.println(registerProtocol.getIsRemoteManage());
-//        if(registerProtocol.getLocalHost().equals(EMPTY_STR)
-//                        || registerProtocol.getLocalPort() == -1
-//                        || registerProtocol.getRemoteProxyPort() == -1) {
-//            System.out.println("Option Error. Local setting('remote proxy port'/'local host'/'local port') is need!");
-//            formatter.printHelp(CLIENT_CMD_STR, options, false);
-//            return;
-//        }
+//        System.out.println(registerProtocol.getIsRemoteManage());
+        if(registerProtocol.getLocalHost().equals(EMPTY_STR)
+                        || registerProtocol.getLocalPort() == -1
+                        || registerProtocol.getRemoteProxyPort() == -1) {
+            System.out.println("Option Error. Local setting('remote proxy port'/'local host'/'local port') is need!");
+            formatter.printHelp(CLIENT_CMD_STR, options, false);
+            return;
+        }
 
         LOG.info("========================================");
         LOG.info(Tools.protocolToString(registerProtocol));
