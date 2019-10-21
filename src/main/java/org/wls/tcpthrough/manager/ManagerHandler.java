@@ -54,7 +54,7 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ManagerResponse msg) {
         if (msg.getType() == ResponseType.REGISTER_RESPONSE.get()) {
-            LOG.info("[ REGISTER_RESPONSE ] First register is successful.");
+            LOG.info("[ REGISTER_RESPONSE ] Register is successful.");
         } else if (msg.getType() == ResponseType.NEW_CONN_RESPONSE.get()) {
             DataClient dataClient;
             String protocolChannelId = msg.getValue();
@@ -157,10 +157,20 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
             }
         } else if(ResponseType.REGISTER_FAIL.get() == msg.getType()){
             LOG.error("Register proxy server error! Error reason:" + msg.getValue());
-            this.registerInfo.setRegisterError(true);
-            this.registerInfo.setErrorReason(msg.getValue());
-            ctx.channel().close();
-
+            if(msg.getValue().startsWith("PORT_IS_ALREADY_USED")){
+                String proxyPort = msg.getValue().split(":")[1];
+                LOG.error("The port " + proxyPort + " in the server has been used by others!!!!!!");
+                if(registerProtocol != null && !registerProtocol.getIsRemoteManage()){
+                    LOG.error("The remote manage is not open, so we need change the configuration, then restart.");
+                    this.registerInfo.setRegisterError(true);
+                    this.registerInfo.setErrorReason(msg.getValue());
+                    ctx.channel().close();
+                }
+            } else{
+                this.registerInfo.setRegisterError(true);
+                this.registerInfo.setErrorReason(msg.getValue());
+                ctx.channel().close();
+            }
         }
     }
 
