@@ -71,7 +71,7 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
                             dataClient = new DataClient(registerProtocol, channelId, clientGroup);
                             dataClient.run();
                             GlobalObject.dataClientMap.put(channelId, dataClient);
-                            LOG.info("Connection is finish");
+                            LOG.info("Connection is finish [ Origin register protocol ]");
                         } else {
                             //Register protocol from server
                             RegisterProtocol findRegister = registerProtocolList.stream()
@@ -82,7 +82,7 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
                                 dataClient = new DataClient(findRegister, channelId, clientGroup);
                                 dataClient.run();
                                 GlobalObject.dataClientMap.put(channelId, dataClient);
-                                LOG.info("Connection is finish");
+                                LOG.info("Connection is finish [ Register protocol from server ]");
                             } else {
                                 LOG.error("Cannot find remote proxy port register! port: " + remoteProxyPort);
                             }
@@ -127,6 +127,8 @@ public class ManagerHandler extends SimpleChannelInboundHandler<ManagerResponse>
                             .setRemoteProxyPort(remote_proxy_port)
                             .setRemoteManagerPort(registerProtocol.getRemoteManagerPort())
                             .setRemoteDataPort(registerProtocol.getRemoteDataPort())
+                            .setIsRemoteManage(registerProtocol.getIsRemoteManage())
+                            .setPassword(registerProtocol.getPassword())
                             .build();
                     registerProtocolList.add(newRegisterProtocol);
 

@@ -31,8 +31,6 @@ public class TcpThroughClient {
 
     public TcpThroughClient(RegisterProtocol registerProtocol) {
         this.registerProtocol = registerProtocol;
-        this.clientGroup = new NioEventLoopGroup();
-
     }
 
     public void run() {
@@ -40,6 +38,7 @@ public class TcpThroughClient {
         ManagerClient client;
         try {
             while (true) {
+                clientGroup = new NioEventLoopGroup();
                 client = null;
                 try {
                     client = new ManagerClient(registerProtocol);
