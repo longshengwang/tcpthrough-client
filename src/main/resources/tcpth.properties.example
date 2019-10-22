@@ -1,0 +1,9 @@
+name=wls_home
+password=wo_shi_server_password
+remote_host=localhost
+remote_data_port=9009
+remote_manager_port=9000
+local_host=localhost
+local_port=22
+remote_proxy_port=2222
+is_remote_manage=true

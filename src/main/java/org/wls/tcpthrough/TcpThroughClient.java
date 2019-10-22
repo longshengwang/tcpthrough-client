@@ -71,7 +71,7 @@ public class TcpThroughClient {
     }
 
     public static String getDefaultPath(String userHomeDir) {
-        return userHomeDir + "/.tcpthrough.properties";
+        return userHomeDir + "/tcpth.properties";
     }
 
     public static String tranArgsStr(String o) {
@@ -162,7 +162,7 @@ public class TcpThroughClient {
             }
 
             String filePath = cmd.getOptionValue("f");
-            return loadFromFilePath(getDefaultPath(filePath));
+            return loadFromFilePath(filePath);
         }
     }
 
